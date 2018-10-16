@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  local:
+    build:
+      context: .
+    stdin_open: true
+    tty: true
+    ports:
+      - "3306:3306"
+    volumes:
+      - ~/src:/root/src
+      - ~/.ssh:/root/.ssh
+      - ~/.aws:/root/.aws
+      - ~/.gitconfig:/root/.gitconfig
+      - ~/.config/gcloud:/root/.config/gcloud
+      - ~/.gsutil:/root/.gsutil
+      - ~/Documents:/root/Documents
+      - ~/Downloads:/root/Downloads
+      #todo mount docker daemon
