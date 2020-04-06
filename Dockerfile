@@ -20,9 +20,12 @@ RUN apt-get install -y mysql-client
 RUN apt-get install -y redis-tools
 RUN apt-get install -y jq
 RUN apt-get install -y maven
+RUN apt-get install -y npm
 
 # Docker
 RUN apt-get install -y docker.io
+RUN curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+RUN chmod +x /usr/local/bin/docker-compose
 
 # kubectl
 RUN apt-get install -y apt-transport-https
@@ -39,6 +42,7 @@ RUN mv linux-amd64/helm /usr/local/bin/helm
 RUN echo "deb http://packages.cloud.google.com/apt cloud-sdk-bionic main" | tee -a /etc/apt/sources.list.d/google-cloud-sdk.list
 RUN curl https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
 RUN apt-get update && apt-get -y install kubectl google-cloud-sdk google-cloud-sdk-app-engine-grpc google-cloud-sdk-pubsub-emulator google-cloud-sdk-app-engine-go google-cloud-sdk-cloud-build-local google-cloud-sdk-datastore-emulator google-cloud-sdk-app-engine-python google-cloud-sdk-cbt google-cloud-sdk-bigtable-emulator google-cloud-sdk-app-engine-python-extras google-cloud-sdk-datalab google-cloud-sdk-app-engine-java
+RUN gcloud auth configure-docker -q
 
 # bigtable emulator
 # RUN apt-get install -y google-cloud-sdk-bigtable-emulator
@@ -109,6 +113,9 @@ RUN echo 'eval `ssh-agent -s`' >> ~/.zshrc
 
 # TODO SPARK
 # curl -fsL https://archive.apache.org/dist/spark/spark-2.3.0/spark-2.3.0-bin-hadoop2.7.tgz | tar xfz -
+
+# Requirement for plantuml
+RUN apt-get install -y graphviz
 
 WORKDIR /root
 ENTRYPOINT /bin/zsh
