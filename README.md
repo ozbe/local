@@ -89,6 +89,14 @@ docker run --rm -it local
 
 ### Troubleshooting
 
+### Volumes keep mounting as empty
+
+If you are using the host machine docker daemon, it is important to remember the volume paths are relative to the host machine.
+
+### How do I expose adhoc ports to the host machine
+
+Say you decide you decide to run an application that exposes a UI on a certain port and you want to access it from your web browser of choice on your host machine. What do you do? Well, you have to restart the container with the port properly exposed. Pretty lame. A way to get around this is to run the application in a container with the port exposed. If these seems obvious, then good. You can move along. If you're a bit confused,
+
 ### Git/SSH bad configurations error
 ```
 2fae441106bb# git push
