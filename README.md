@@ -1,10 +1,15 @@
 # Local
 
-Dev local image with tools I use day-to-day at work. 
+Dev local image with tools I use day-to-day.
 
-This prevents me from having to worry about version mismatching, my laptop breaking and having to start installing all over, volumes for the data I need to persists from run to run are mounted, and most importantly, when something breaks I can just stop the process and start over. 
+This prevents me from having to worry about version mismatching, my
+laptop breaking and having to start installing all over, volumes for the
+data I need to persists from run to run are mounted, and most
+importantly, when something breaks I can just stop the process and start
+over.
 
 ## High-Level Tools
+
 - zsh
 - git
 - vim
@@ -33,14 +38,17 @@ This prevents me from having to worry about version mismatching, my laptop break
 
 ### Docker Compose
 
-If you plan to use Docker Compose (vs plain ol Docker commands), there is a template provided in `docker-compose.example.yml`. 
+If you plan to use Docker Compose (vs plain ol Docker commands), there
+is a template provided in `docker-compose.example.yml`.
 
-First copy the file
-`$ cp docker-compose.example.yml docker-compose.yml`
+First copy the file `$ cp docker-compose.example.yml docker-compose.yml`
 
-If you have your computer (host) files organized in the same fashion as mine, you're good to go. Otherwise you'll want to edit the volumes in `docker-compose.yml` to mount the volumes where you have them saved.
+If you have your computer (host) files organized in the same fashion as
+mine, you're good to go. Otherwise you'll want to edit the volumes in
+`docker-compose.yml` to mount the volumes where you have them saved.
 
-It is important to mount the volumes, as anything stored on a non-mounted volume will be lost when you turn off the process.
+It is important to mount the volumes, as anything stored on a
+non-mounted volume will be lost when you turn off the process.
 
 ### Aliases (optional)
 
@@ -56,20 +64,24 @@ Now you have the aliases
 ## Usage
 
 Start docker-compose in dettached mode
+
 ```
 $ docker-compose up -d
 ```
 
 Open a terminal
+
 ```
 $ docker-compose exec local zsh
 ```
 
 ## docker-compose
 
-**NOTE** Some volumes mounted in docker-compose are specially catered to my preferred file storage locations.
+**NOTE** Some volumes mounted in docker-compose are specially catered to
+my preferred file storage locations.
 
 ### Build
+
 ```
 docker-compose build --no-cache # Note the --no-cache, apt-update can get skipped is this isn't used
 ```
@@ -83,6 +95,7 @@ docker build -t local .
 ```
 
 ### Run
+
 ```
 docker run --rm -it local
 ```
@@ -91,13 +104,21 @@ docker run --rm -it local
 
 ### Volumes keep mounting as empty
 
-If you are using the host machine docker daemon, it is important to remember the volume paths are relative to the host machine.
+If you are using the host machine docker daemon, it is important to
+remember the volume paths are relative to the host machine.
 
 ### How do I expose adhoc ports to the host machine
 
-Say you decide you decide to run an application that exposes a UI on a certain port and you want to access it from your web browser of choice on your host machine. What do you do? Well, you have to restart the container with the port properly exposed. Pretty lame. A way to get around this is to run the application in a container with the port exposed. If these seems obvious, then good. You can move along. If you're a bit confused,
+Say you decide you decide to run an application that exposes a UI on a
+certain port and you want to access it from your web browser of choice
+on your host machine. What do you do? Well, you have to restart the
+container with the port properly exposed. Pretty lame. A way to get
+around this is to run the application in a container with the port
+exposed. If these seems obvious, then good. You can move along. If
+you're a bit confused,
 
 ### Git/SSH bad configurations error
+
 ```
 2fae441106bb# git push
 /root/.ssh/config: line 3: Bad configuration option: usekeychain
@@ -130,3 +151,4 @@ Enter passphrase for key '/root/.ssh/id_rsa':
 eval $(ssh-agent -s)
 ssh-add ~/.ssh/id_rsa
 ```
+
